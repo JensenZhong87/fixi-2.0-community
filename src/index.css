@@ -1,0 +1,1010 @@
+@import "tailwindcss";
+
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
+  text-rendering: geometricPrecision;
+}
+
+* {
+  scrollbar-width: thin;
+}
+
+::selection {
+  background: rgba(52, 199, 89, 0.24);
+}
+
+.fixi-app {
+  --app-bg: #f8fafc;
+  --header-bg: rgba(248, 250, 252, 0.7);
+  --card-bg: rgba(255, 255, 255, 0.42);
+  --card-strong-bg: rgba(255, 255, 255, 0.42);
+  --control-bg: rgba(244, 246, 250, 0.56);
+  --control-bg-strong: rgba(255, 255, 255, 0.68);
+  --border: rgba(60, 60, 67, 0.12);
+  --border-strong: rgba(60, 60, 67, 0.2);
+  --text: #111113;
+  --muted: rgba(60, 60, 67, 0.66);
+  --subtle: rgba(60, 60, 67, 0.42);
+  --primary: #007aff;
+  --success: #34c759;
+  --button-dark: #111113;
+  --button-dark-text: #ffffff;
+  --shadow: none;
+  --shadow-soft: none;
+  --inner-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  --glass-blur: saturate(190%) blur(24px);
+  min-height: 100vh;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 18% 0%, rgba(120, 235, 255, 0.2), transparent 31%),
+    radial-gradient(circle at 88% -8%, rgba(203, 149, 255, 0.18), transparent 34%),
+    linear-gradient(180deg, #ffffff 0%, var(--app-bg) 52%, #eef4fb 100%);
+}
+
+.fixi-app.dark {
+  color-scheme: dark;
+  --app-bg: #05070a;
+  --header-bg: transparent;
+  --card-bg: rgba(26, 28, 32, 0.16);
+  --card-strong-bg: rgba(26, 28, 32, 0.16);
+  --control-bg: rgba(39, 42, 48, 0.3);
+  --control-bg-strong: rgba(30, 33, 38, 0.42);
+  --border: rgba(235, 245, 255, 0.13);
+  --border-strong: rgba(235, 245, 255, 0.23);
+  --text: #f5f5f7;
+  --muted: rgba(235, 235, 245, 0.66);
+  --subtle: rgba(235, 235, 245, 0.42);
+  --primary: #0a84ff;
+  --success: #30d158;
+  --button-dark: #f5f5f7;
+  --button-dark-text: #050506;
+  --shadow: none;
+  --shadow-soft: none;
+  --inner-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(135deg, rgba(17, 24, 39, 0.92), rgba(5, 7, 10, 0.96) 45%, rgba(5, 10, 8, 0.98) 100%),
+    radial-gradient(circle at 16% 0%, rgba(48, 209, 88, 0.13), transparent 30%),
+    radial-gradient(circle at 88% -10%, rgba(10, 132, 255, 0.13), transparent 34%),
+    linear-gradient(180deg, #101217 0%, var(--app-bg) 48%, #050506 100%);
+}
+
+.fixi-app .aurora-container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  pointer-events: none;
+  overflow: hidden !important;
+  opacity: 0.9;
+  background: #ffffff;
+  filter: saturate(1.24) brightness(1.08);
+}
+
+.fixi-app .aurora-container::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.22)),
+    radial-gradient(circle at 50% -12%, rgba(255, 255, 255, 0.14), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(248, 250, 252, 0.12) 72%, rgba(255, 255, 255, 0.34));
+}
+
+.fixi-app.dark .aurora-container {
+  opacity: 0.94;
+  background: transparent;
+  filter: none;
+}
+
+.fixi-app.dark .aurora-container::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background:
+    radial-gradient(circle at 50% -12%, rgba(255, 255, 255, 0.06), transparent 28%),
+    linear-gradient(180deg, rgba(5, 7, 10, 0.08), rgba(5, 7, 10, 0.44) 72%, rgba(5, 7, 10, 0.82));
+}
+
+.fixi-app .aurora-container canvas,
+.fixi-app.dark .aurora-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.fixi-app > main {
+  position: relative;
+  z-index: 1;
+}
+
+.guide-float-button {
+  position: fixed;
+  left: 18px;
+  top: 50%;
+  z-index: 35;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 54px;
+  min-height: 148px;
+  padding: 16px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--text);
+  box-shadow: var(--inner-highlight);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  transform: translateY(-50%);
+}
+
+.fixi-app.dark .guide-float-button {
+  background: rgba(22, 24, 30, 0.28);
+}
+
+.guide-float-button span {
+  color: inherit !important;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.12;
+  writing-mode: vertical-rl;
+  letter-spacing: 0.08em;
+}
+
+.guide-modal-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  background: rgba(8, 10, 14, 0.46);
+  backdrop-filter: saturate(150%) blur(18px);
+  -webkit-backdrop-filter: saturate(150%) blur(18px);
+}
+
+.guide-modal-panel {
+  width: min(1120px, 96vw);
+  max-height: min(88vh, 980px);
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: 34px;
+  background: rgba(255, 255, 255, 0.74);
+  color: var(--text);
+  box-shadow: 0 28px 90px rgba(15, 23, 42, 0.18), var(--inner-highlight);
+  backdrop-filter: saturate(180%) blur(30px);
+  -webkit-backdrop-filter: saturate(180%) blur(30px);
+}
+
+.fixi-app.dark .guide-modal-panel {
+  background: rgba(22, 24, 30, 0.72);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.42), var(--inner-highlight);
+}
+
+.guide-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 28px 30px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.guide-kicker {
+  margin: 0 0 6px;
+  color: var(--success) !important;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.guide-modal-header h2 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.guide-close-button {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 999px !important;
+  background: var(--control-bg-strong);
+  color: var(--text);
+}
+
+.guide-modal-body {
+  display: grid;
+  gap: 18px;
+  max-height: calc(min(88vh, 980px) - 104px);
+  overflow-y: auto;
+  padding: 24px 30px 30px;
+}
+
+.fixi-app .guide-section {
+  display: grid;
+  gap: 16px;
+  border: 1px solid var(--border) !important;
+  border-radius: 26px !important;
+  background: rgba(255, 255, 255, 0.38) !important;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.fixi-app.dark .guide-section {
+  background: rgba(255, 255, 255, 0.055) !important;
+}
+
+.guide-hero-section {
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr);
+  align-items: center;
+}
+
+.guide-section h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.guide-section p {
+  margin: 6px 0 0;
+  color: var(--muted) !important;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.guide-chip-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.guide-chip-cloud span {
+  border: 1px solid rgba(52, 199, 89, 0.28);
+  border-radius: 999px;
+  background: rgba(52, 199, 89, 0.1);
+  color: var(--text) !important;
+  padding: 8px 11px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.guide-section-title {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 12px;
+  align-items: baseline;
+}
+
+.guide-section-title > span {
+  color: var(--success) !important;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.guide-section-title > p {
+  grid-column: 2;
+}
+
+.guide-example-image {
+  width: 100%;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.82);
+  object-fit: contain;
+}
+
+.guide-note-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.guide-note-grid > div {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--control-bg);
+  padding: 14px;
+}
+
+.guide-note-grid strong {
+  color: var(--text);
+  font-size: 14px;
+}
+
+.guide-priority-tips {
+  display: grid;
+  gap: 10px;
+}
+
+.guide-priority-tips > div {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: start;
+  border: 1px solid rgba(52, 199, 89, 0.32);
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(52, 199, 89, 0.16), rgba(52, 199, 89, 0.07));
+  padding: 12px 14px;
+}
+
+.fixi-app.dark .guide-priority-tips > div {
+  background: linear-gradient(135deg, rgba(48, 209, 88, 0.2), rgba(48, 209, 88, 0.08));
+}
+
+.guide-priority-tips svg {
+  margin-top: 3px;
+  color: var(--success);
+}
+
+.guide-priority-tips p {
+  margin: 0;
+  color: var(--text) !important;
+  font-weight: 800;
+  line-height: 1.65;
+}
+
+.guide-trouble-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.guide-trouble-list li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--muted) !important;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.guide-trouble-list li::before {
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--success);
+  content: "";
+}
+
+.guide-address-section {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.guide-address-card {
+  border: 1px solid rgba(0, 122, 255, 0.22);
+  border-radius: 18px;
+  background: rgba(0, 122, 255, 0.08);
+  color: var(--primary);
+  padding: 14px 18px;
+  font-size: 20px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .guide-float-button {
+    left: 10px;
+    width: 46px;
+    min-height: 124px;
+  }
+
+  .guide-hero-section,
+  .guide-address-section,
+  .guide-note-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-address-card {
+    white-space: normal;
+    word-break: break-all;
+  }
+}
+
+.fixi-app .app-header {
+  position: relative;
+  z-index: 1;
+  border-color: var(--border);
+  background: var(--header-bg);
+  backdrop-filter: saturate(180%) blur(22px);
+  -webkit-backdrop-filter: saturate(180%) blur(22px);
+}
+
+.fixi-app:not(.dark) .app-header {
+  border-color: transparent !important;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.fixi-app.dark .app-header {
+  border-color: transparent !important;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.fixi-app section,
+.fixi-app aside > section,
+.fixi-app article {
+  border-color: var(--border) !important;
+  border-radius: 28px !important;
+  background: var(--card-bg) !important;
+  color: var(--text);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--inner-highlight);
+  isolation: isolate;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.fixi-app section section,
+.fixi-app article section {
+  box-shadow: none !important;
+}
+
+.fixi-app aside > section,
+.fixi-app .right-workspace > section {
+  background: var(--card-bg) !important;
+  box-shadow: var(--inner-highlight) !important;
+}
+
+.fixi-app h1,
+.fixi-app h2,
+.fixi-app h3,
+.fixi-app .font-semibold,
+.fixi-app .font-medium {
+  color: var(--text);
+}
+
+.fixi-app p,
+.fixi-app span,
+.fixi-app li,
+.fixi-app .text-zinc-500,
+.fixi-app .text-zinc-600,
+.fixi-app .text-zinc-700,
+.fixi-app .text-zinc-400 {
+  color: var(--muted);
+}
+
+.fixi-app button,
+.fixi-app button span,
+.fixi-app label span,
+.fixi-app span.font-semibold,
+.fixi-app span.font-medium,
+.fixi-app .font-semibold span,
+.fixi-app .font-medium span {
+  color: inherit;
+}
+
+.fixi-app label > span,
+.fixi-app button .block.font-semibold,
+.fixi-app button .text-sm.font-semibold {
+  color: var(--text) !important;
+}
+
+.fixi-app h1,
+.fixi-app h2,
+.fixi-app h3,
+.fixi-app button,
+.fixi-app textarea,
+.fixi-app input {
+  letter-spacing: 0;
+}
+
+.fixi-app button {
+  border-color: var(--border) !important;
+  border-radius: 16px !important;
+  transition: transform 160ms ease, border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+}
+
+.fixi-app button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: var(--border-strong) !important;
+}
+
+.fixi-app button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.fixi-app button:disabled {
+  cursor: not-allowed;
+}
+
+.fixi-app .bg-white,
+.fixi-app .bg-zinc-50 {
+  background-color: var(--control-bg) !important;
+}
+
+.fixi-app .bg-zinc-950 {
+  background-color: var(--button-dark) !important;
+  color: var(--button-dark-text) !important;
+}
+
+.fixi-app .text-white {
+  color: var(--button-dark-text) !important;
+}
+
+.fixi-app .border-zinc-200,
+.fixi-app .border-zinc-300 {
+  border-color: var(--border) !important;
+}
+
+.fixi-app input,
+.fixi-app textarea {
+  border-color: var(--border) !important;
+  border-radius: 22px !important;
+  background: var(--control-bg-strong) !important;
+  color: var(--text) !important;
+  box-shadow: var(--inner-highlight);
+}
+
+.fixi-app textarea {
+  line-height: 1.75;
+}
+
+.fixi-app input::placeholder,
+.fixi-app textarea::placeholder {
+  color: var(--subtle);
+}
+
+.fixi-app input:focus,
+.fixi-app textarea:focus {
+  border-color: rgba(0, 122, 255, 0.62) !important;
+  box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.14);
+}
+
+.fixi-app .theme-switch {
+  border-radius: 16px !important;
+  background: var(--control-bg) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.fixi-app .theme-switch button {
+  border-radius: 12px !important;
+}
+
+.fixi-app .bg-emerald-600 {
+  background: linear-gradient(180deg, #13c782 0%, #00a66a 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 24px rgba(0, 166, 106, 0.22);
+}
+
+.fixi-app .bg-emerald-50,
+.fixi-app .bg-emerald-950\/60 {
+  background: rgba(52, 199, 89, 0.12) !important;
+}
+
+.fixi-app .border-emerald-600,
+.fixi-app .border-emerald-500,
+.fixi-app .border-emerald-200 {
+  border-color: rgba(52, 199, 89, 0.58) !important;
+}
+
+.fixi-app .text-emerald-700,
+.fixi-app .text-emerald-800,
+.fixi-app .text-emerald-900 {
+  color: var(--success) !important;
+}
+
+.fixi-app .rounded-lg,
+.fixi-app .rounded-md {
+  border-radius: 18px;
+}
+
+.fixi-app .shadow-sm {
+  box-shadow: var(--inner-highlight) !important;
+}
+
+.fixi-app img {
+  user-select: none;
+}
+
+.fixi-app.game-mode header,
+.fixi-app.game-mode main,
+.fixi-app.game-mode .fixed:not(.snake-game) {
+  pointer-events: none;
+  user-select: none;
+}
+
+.fixi-app .game-entry-button {
+  border-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.fixi-app .snake-game {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 80;
+  width: 320px;
+  height: 208px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  pointer-events: auto;
+}
+
+.fixi-app:not(.dark) .snake-game {
+  background: transparent;
+}
+
+.fixi-app .snake-stage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.fixi-app .snake-boundary {
+  fill: rgba(255, 255, 255, 0.035);
+  stroke: rgba(235, 245, 255, 0.22);
+  stroke-width: 1;
+  stroke-dasharray: 5 7;
+  transition: width 220ms ease, height 220ms ease;
+}
+
+.fixi-app:not(.dark) .snake-boundary {
+  fill: rgba(255, 255, 255, 0.18);
+  stroke: rgba(60, 60, 67, 0.18);
+}
+
+.fixi-app .snake-line,
+.fixi-app .snake-line-shadow {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: points 170ms linear;
+}
+
+.fixi-app .snake-line-shadow {
+  stroke: rgba(0, 0, 0, 0.34);
+  stroke-width: 6.5;
+}
+
+.fixi-app .snake-line {
+  stroke: #30d158;
+  stroke-width: 4.2;
+}
+
+.fixi-app .snake-head-dot {
+  fill: #30d158;
+  stroke: rgba(255, 255, 255, 0.72);
+  stroke-width: 1.2;
+  transition: cx 170ms linear, cy 170ms linear;
+}
+
+.fixi-app .snake-food-dot {
+  fill: #ff453a;
+  stroke: rgba(255, 255, 255, 0.84);
+  stroke-width: 1.1;
+  transition: cx 170ms linear, cy 170ms linear;
+}
+
+.fixi-app .snake-eye {
+  fill: rgba(5, 7, 10, 0.84);
+  stroke: rgba(255, 255, 255, 0.5);
+  stroke-width: 0.25;
+  transition: cx 170ms linear, cy 170ms linear;
+}
+
+.fixi-app .snake-tongue {
+  fill: none;
+  stroke: #ff375f;
+  stroke-width: 0.85;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.82;
+  transition: d 170ms linear;
+}
+
+.fixi-app .snake-score {
+  position: absolute;
+  right: 0;
+  top: -20px;
+  min-width: 26px;
+  height: 18px;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: rgba(8, 10, 14, 0.38);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.fixi-app:not(.dark) .snake-score {
+  background: rgba(255, 255, 255, 0.48);
+  color: rgba(17, 17, 19, 0.62);
+}
+
+.fixi-app:not(.dark) .snake-line-shadow {
+  stroke: rgba(255, 255, 255, 0.74);
+}
+
+.fixi-app .snake-game-over {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  width: 94px;
+  padding: 8px;
+  border: 1px solid rgba(235, 245, 255, 0.14);
+  border-radius: 16px;
+  background: rgba(8, 10, 14, 0.66);
+  color: rgba(255, 255, 255, 0.88);
+  text-align: center;
+  backdrop-filter: blur(14px) saturate(145%);
+  -webkit-backdrop-filter: blur(14px) saturate(145%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.fixi-app:not(.dark) .snake-game-over {
+  border-color: rgba(60, 60, 67, 0.12);
+  background: rgba(255, 255, 255, 0.7);
+  color: rgba(17, 17, 19, 0.78);
+}
+
+.fixi-app .snake-game-over-mood {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.fixi-app .snake-game-over-score {
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.fixi-app .snake-game-over button {
+  margin-top: 7px;
+  min-height: 24px;
+  width: 100%;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.88) !important;
+  color: rgba(17, 17, 19, 0.86) !important;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: none !important;
+}
+
+.fixi-app:not(.dark) .snake-game-over button {
+  background: rgba(17, 17, 19, 0.86) !important;
+  color: #fff !important;
+}
+
+.fixi-app.dark .text-zinc-950,
+.fixi-app.dark .text-zinc-900,
+.fixi-app.dark .text-zinc-800,
+.fixi-app.dark .text-zinc-700 {
+  color: var(--text) !important;
+}
+
+.fixi-app.dark .text-zinc-600,
+.fixi-app.dark .text-zinc-500,
+.fixi-app.dark .text-zinc-400 {
+  color: var(--muted) !important;
+}
+
+.fixi-app.dark .hover\:bg-zinc-50:hover {
+  background-color: rgba(58, 58, 60, 0.8) !important;
+}
+
+.fixi-app.dark .bg-red-50,
+.fixi-app.dark .bg-orange-50,
+.fixi-app.dark .bg-yellow-50,
+.fixi-app.dark .bg-rose-50,
+.fixi-app.dark .bg-pink-50,
+.fixi-app.dark .bg-fuchsia-50,
+.fixi-app.dark .bg-violet-50,
+.fixi-app.dark .bg-blue-50,
+.fixi-app.dark .bg-cyan-50,
+.fixi-app.dark .bg-sky-50 {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.fixi-app .right-workspace {
+  gap: 34px;
+}
+
+.fixi-app .repair-card,
+.fixi-app .manual-issue-card,
+.fixi-app .preview-card,
+.fixi-app .additional-requirement-card,
+.fixi-app .result-actions-card {
+  background: var(--card-bg) !important;
+  box-shadow: var(--inner-highlight) !important;
+}
+
+.fixi-app.dark .repair-card,
+.fixi-app.dark .manual-issue-card,
+.fixi-app.dark .preview-card,
+.fixi-app.dark .additional-requirement-card,
+.fixi-app.dark .result-actions-card {
+  box-shadow: var(--inner-highlight) !important;
+}
+
+.fixi-app aside > section,
+.fixi-app .right-workspace > section {
+  background: var(--card-bg) !important;
+  box-shadow: var(--inner-highlight) !important;
+}
+
+.fixi-app .repair-card textarea {
+  min-height: 176px;
+}
+
+.fixi-app .manual-issue-card {
+  margin-top: 2px;
+}
+
+.fixi-app .manual-issue-card > .relative.z-20 {
+  position: relative;
+  z-index: 30;
+}
+
+.fixi-app .manual-issue-card .grid {
+  position: relative;
+  z-index: 1;
+}
+
+.fixi-app .manual-issue-lock {
+  top: 76px;
+  background: rgba(245, 247, 251, 0.58);
+  backdrop-filter: blur(12px) saturate(135%);
+  -webkit-backdrop-filter: blur(12px) saturate(135%);
+}
+
+.fixi-app.dark .manual-issue-lock {
+  background: rgba(10, 12, 16, 0.62);
+}
+
+.fixi-app .manual-issue-lock-badge {
+  border-color: rgba(255, 255, 255, 0.34);
+  background: rgba(255, 255, 255, 0.76);
+  color: rgba(17, 17, 19, 0.78);
+  box-shadow: 0 16px 42px rgba(15, 23, 42, 0.16);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+}
+
+.fixi-app.dark .manual-issue-lock-badge {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(36, 39, 45, 0.82);
+  color: rgba(245, 245, 247, 0.9);
+  box-shadow: 0 18px 54px rgba(0, 0, 0, 0.48);
+}
+
+.fixi-app .preview-card img,
+.fixi-app .history-preview-stage img {
+  border-radius: 24px !important;
+  background: rgba(10, 10, 12, 0.92) !important;
+}
+
+.fixi-app .preview-image-stage {
+  min-height: 360px;
+  max-height: min(78vh, 960px);
+  overflow: hidden;
+}
+
+.fixi-app .preview-image-full {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: min(74vh, 920px);
+}
+
+.fixi-app .selection-image-wrap {
+  display: inline-block;
+  max-width: 100%;
+  max-height: min(74vh, 920px);
+  line-height: 0;
+  user-select: none;
+}
+
+.fixi-app .selection-image-wrap.is-selecting {
+  cursor: crosshair;
+}
+
+.fixi-app .selection-image-wrap.is-selecting img {
+  pointer-events: none;
+}
+
+.fixi-app .selection-box {
+  position: absolute;
+  z-index: 2;
+  border: 2px solid #ff2d2d;
+  border-radius: 10px;
+  background: rgba(255, 45, 45, 0.08);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.65), 0 0 22px rgba(255, 45, 45, 0.35);
+  pointer-events: none;
+}
+
+.fixi-app .selection-box-index {
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  display: inline-flex;
+  min-width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px 0 8px 0;
+  background: #ff2d2d;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: 0 8px 18px rgba(255, 45, 45, 0.28);
+}
+
+.fixi-app .selection-box-draft {
+  border-style: dashed;
+  background: rgba(255, 45, 45, 0.12);
+}
+
+.fixi-app .history-preview-stage {
+  min-height: 220px;
+  max-height: 420px;
+  overflow: hidden;
+}
+
+.fixi-app .history-preview-image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 400px;
+}
+
+.fixi-app .app-header {
+  box-shadow: 0 1px 0 var(--border);
+}
+
+.fixi-app:not(.dark) .app-header {
+  box-shadow: none;
+}
+
+.fixi-app.dark .app-header {
+  box-shadow: none;
+}
+
+.fixi-app .app-header img {
+  filter: drop-shadow(0 12px 22px rgba(0, 122, 255, 0.14));
+}
+
+.fixi-app.dark .app-header img {
+  filter: drop-shadow(0 14px 28px rgba(10, 132, 255, 0.2));
+}
+
+@media (max-width: 768px) {
+  .fixi-app main {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .fixi-app .app-header > div {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
